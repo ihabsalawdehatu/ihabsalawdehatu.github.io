@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .container { width: 300px; margin: auto; }
+        label { display: block; margin-top: 10px; }
+        input[type=text], input[type=password] {
+            width: 100%; padding: 8px; margin-top: 5px;
+        }
+        #message { margin-top: 20px; font-weight: bold; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Shop — Login</h2>
+        
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text">
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password">
+
+        <button id="loginBtn" onclick="login()">Login</button>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function login() {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+            const msg = document.getElementById("message");
+
+            if (user === "student" && pass === "1234") {
+                msg.innerHTML = "Login successful!";
+                msg.className = "success";
+                window.location.href = "product.html";
+            } else {
+                msg.innerHTML = "Invalid username or password.";
+                msg.className = "error";
+            }
+        }
+    </script>
+</body>
+</html>
