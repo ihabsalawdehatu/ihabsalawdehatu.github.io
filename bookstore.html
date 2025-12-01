@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookstore</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .book-title { cursor: pointer; margin: 10px 0; }
+        #cartCount { font-weight: bold; }
+        #confirmationMessage { color: green; font-weight: bold; }
+        #noResultsMessage { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Bookstore</h1>
+
+    <input type="text" id="searchInput" placeholder="Search books...">
+    <div id="bookList">
+        <div class="book-title">Selenium WebDriver Guide</div>
+        <div class="book-title">Java Programming Basics</div>
+        <div class="book-title">Effective Java</div>
+    </div>
+
+    <p>Cart Items: <span id="cartCount">0</span></p>
+    <button id="cartButton">View Cart</button>
+
+    <div id="noResultsMessage" style="display:none;">No books found</div>
+    <div id="confirmationMessage" style="display:none;">Order placed successfully!</div>
+
+    <script>
+        const books = document.querySelectorAll('.book-title');
+        let cart = 0;
+
+        books.forEach(book => {
+            book.addEventListener('click', () => {
+                sessionStorage.setItem('selectedBook', book.innerText);
+                sessionStorage.setItem('cart', cart);
+                window.location.href = 'book.html';
+            });
+        });
+
+        document.getElementById('cartButton').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+
+        document.getElementById('searchInput').addEventListener('change', () => {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            let found = false;
+            books.forEach(book => {
+                if(book.innerText.toLowerCase().includes(query)) {
+                    book.style.display = 'block';
+                    found = true;
+                } else {
+                    book.style.display = 'none';
+                }
+            });
+            document.getElementById('noResultsMessage').style.display = found ? 'none' : 'block';
+        });
+
+        if(sessionStorage.getItem('cart')) {
+            cart = parseInt(sessionStorage.getItem('cart'));
+        }
+        document.getElementById('cartCount').innerText = cart;
+    </script>
+</body>
+</html>
