@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Details</title>
+</head>
+<body>
+    <h1 id="bookTitle"></h1>
+    <button id="addToCartButton">Add to Cart</button>
+    <script>
+        let cart = parseInt(sessionStorage.getItem('cart') || '0');
+        const selectedBook = sessionStorage.getItem('selectedBook');
+        document.getElementById('bookTitle').innerText = selectedBook;
+
+        document.getElementById('addToCartButton').addEventListener('click', () => {
+            cart++;
+            sessionStorage.setItem('cart', cart);
+            alert(selectedBook + " added to cart!");
+            window.location.href = 'bookstore.html';
+        });
+    </script>
+</body>
+</html>
